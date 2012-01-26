@@ -2,20 +2,20 @@
 
 RESULT=0
 
-function green {
+green () {
 	echo "[32m$*[0m"
 }
 
-function red {
+red () {
 	echo "[7;31m$*[0m"
 }
 
 for IN in *.in;
 do
-	[[ -f "$IN" ]] || ( echo "no tests" && continue )
+	[ -f "$IN" ] || ( echo "no tests" && continue )
 
 	OUT=$( basename -s.in "$IN" ).out
-	[[ -f "$OUT" ]] || continue
+	[ -f "$OUT" ] || continue
 
 	printf "$IN... "
 	TMP=$( mktemp -t meml )
