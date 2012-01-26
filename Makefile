@@ -7,5 +7,8 @@ lex.yy.c:	meml.l y.tab.c
 y.tab.c:	meml.y
 			yacc -vdt meml.y
 
+test:	meml
+		cd tests && ./run.sh
+
 clean:
 		rm lex.yy.* y.tab.* y.output
