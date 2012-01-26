@@ -9,7 +9,7 @@ extern yylval;
 %}
 %option noyywrap
 %%
-[a-zA-Z]	{
+[a-zA-Z]+	{
 				strncpy(word, yytext, SIZE_WORD);
 				return T_Word;
 			}
