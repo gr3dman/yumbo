@@ -1,5 +1,5 @@
 meml:	lex.yy.c y.tab.c
-		cc -lfl -ll -o meml *.c
+		cc -o meml *.c
 
 lex.yy.c:	meml.l y.tab.c
 			flex meml.l
