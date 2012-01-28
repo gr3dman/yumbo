@@ -1,4 +1,5 @@
 %{
+#include <stdio.h>
 #include "meml.h"
 
 %}
@@ -23,7 +24,7 @@ Table : '[' T_Word ']' { table(word); }
 
 Relation : Cardinal Attr '-' Dotted Arrow Cardinal {
 			cardinal1($1);
-
+			attribute($2);
 			cardinal2($6);
 		 }
 		 | '^' '-' Dotted { inherit(); }
@@ -35,9 +36,9 @@ Cardinal : '1'	{ $$ = CARD_ONE; }
 		 |
 		 ;
 
-Attr : '<' '>'	{ printf("aggregate\n"); }
-	 | '+' '+'	{ printf("composite\n"); }
-	 | '<'		{ printf("reverse arrow\n"); }
+Attr : '<' '>'	{ $$ = ATTR_AGGREGATE; }
+	 | '+' '+'	{ $$ = ATTR_COMPOSE; }
+	 | '<'		{ $$ = ATTR_ARROW; }
 	 | 
 	 ;
 

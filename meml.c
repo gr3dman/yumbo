@@ -22,6 +22,10 @@ void table(char *name) {
 	strncpy(buff, name, len);
 }
 
+void attribute(enum attribute attr) {
+	current->attribute = attr;
+}
+
 void inherit() {
 	current->inherit = 1;
 }
@@ -34,6 +38,13 @@ void cardinal2(enum cardinal card) {
 	current->cardinal2 = card;
 }
 
+void print_attribute(enum attribute attr) {
+	printf("%s\n", attr == ATTR_ARROW ? "arrow"
+			: attr == ATTR_AGGREGATE ? "aggregate"
+			: attr == ATTR_COMPOSE ? "compose"
+			: "unknown");
+}
+
 void print_cardinality(char *fmt, enum cardinal card) {
 	printf(fmt, card == CARD_ONE ? "one"
 				: card == CARD_MANY ? "many"
@@ -42,13 +53,17 @@ void print_cardinality(char *fmt, enum cardinal card) {
 }
 
 void print_state(t_state *state) {
-	printf("table1 %s\n", state->table1);
+	printf("table %s\n", state->table1);
 	if (state->inherit)
 		printf("inherit\n");
+	if (state->attribute)
+		print_attribute(state->attribute);
 	if (state->cardinal1)
-		print_cardinality("left cardinality: %s", state->cardinal1);
+		print_cardinality("%s\n", state->cardinal1);
 	if (state->cardinal2)
-		print_cardinality("right cardinality: %s", state->cardinal2);
+		print_cardinality("%s\n", state->cardinal2);
+	if (state->table2)
+		printf("table %s\n", state->table2);
 }
 
 void print_states() {

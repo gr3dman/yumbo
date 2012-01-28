@@ -4,9 +4,8 @@
 enum attribute {
 	ATTR_NONE = 0,
 	ATTR_ARROW = 1,
-	ATTR_INHERIT = 2,
-	ATTR_AGGREGATE = 4,
-	ATTR_COMPOSE = 8
+	ATTR_AGGREGATE = 2,
+	ATTR_COMPOSE = 4
 };
 
 enum cardinal {
@@ -31,6 +30,7 @@ char word[SIZE_WORD];
 void term();
 void table(char *name);
 
+void attribute(enum attribute attr);
 void inherit();
 
 void cardinal1(enum cardinal card);
