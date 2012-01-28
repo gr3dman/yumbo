@@ -56,6 +56,7 @@ void print_attribute(enum attribute attr) {
 void print_cardinality(char *fmt, enum cardinal card) {
 	printf(fmt, card == CARD_ONE ? "one"
 				: card == CARD_MANY ? "many"
+				: card == CARD_ZERO_ONE ? "zero or one"
 				: card == CARD_ZERO_MANY ? "zero or many"
 				: "unknown");
 }

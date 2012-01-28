@@ -31,11 +31,13 @@ Relation : Cardinal Attr '-' Dotted Arrow Cardinal {
 
 Cardinal : '1'	{ $$ = CARD_ONE; }
 		 | '*'	{ $$ = CARD_MANY; }
+		 | '0' '.' '.' '1'	{ $$ = CARD_ZERO_ONE; }
 		 | '0' '.' '.' '*'	{ $$ = CARD_ZERO_MANY; }
 		 |
 		 ;
 
 Attr : '<' '>'	{ $$ = ATTR_AGGREGATE; }
+	 | '+'		{ $$ = ATTR_AGGREGATE; }
 	 | '+' '+'	{ $$ = ATTR_COMPOSE; }
 	 | '<'		{ $$ = ATTR_REVERSE_ARROW; }
 	 | 

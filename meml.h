@@ -12,7 +12,8 @@ enum cardinal {
 	CARD_NONE = 0,
 	CARD_ONE = 1,
 	CARD_MANY = 2,
-	CARD_ZERO_MANY = 4
+	CARD_ZERO_ONE = 4,
+	CARD_ZERO_MANY = 8
 };
 
 typedef struct {
