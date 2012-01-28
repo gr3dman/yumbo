@@ -20,7 +20,7 @@ void term() {
 
 void table(char *name) {
 	char *buff;
-	int len = strlen(name);
+	int len = strlen(name) + 1;
 	if (!current->table1)
 		buff = current->table1 = malloc(len * sizeof (char));
 	else
