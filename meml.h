@@ -1,6 +1,5 @@
+#define SIZE_STATES 128
 #define SIZE_WORD 256
-
-char word[SIZE_WORD];
 
 enum attribute {
 	ATTR_NONE = 0,
@@ -25,5 +24,16 @@ typedef struct {
 	enum cardinal cardinal1, cardinal2;
 	enum attribute attribute;
 } t_state;
+
+char word[SIZE_WORD];
+
+
+void term();
+void table(char *name);
+
+void inherit();
+
+void cardinal1(enum cardinal card);
+void cardinal2(enum cardinal card);
 
 void yyerror(char *msg);

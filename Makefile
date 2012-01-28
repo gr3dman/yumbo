@@ -1,4 +1,4 @@
-meml:	lex.yy.c y.tab.c
+meml:	meml.c lex.yy.c y.tab.c
 		cc -o meml *.c
 
 lex.yy.c:	meml.l y.tab.c
