@@ -10,7 +10,7 @@ red () {
 	echo "[7;31m$*[0m"
 }
 
-for IN in *.in;
+for IN in basic-*.in;
 do
 	[ -f "$IN" ] || ( echo "no tests" && continue )
 
@@ -27,6 +27,20 @@ do
 	else
 		red BAD
 		RESULT=1
+	fi
+done
+
+for IN in fail-*.in;
+do
+	[ -f "$IN" ] || (echo "no tests" && continue )
+
+	printf "$IN... "
+	if ../meml < "$IN" > /dev/null 2>&1;
+	then
+		red BAD
+		RESULT=1
+	else
+		green OK
 	fi
 done
 
