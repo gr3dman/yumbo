@@ -3,23 +3,26 @@
 char word[SIZE_WORD];
 
 enum attribute {
+	ATTR_NONE = 0,
 	ATTR_ARROW = 1,
 	ATTR_INHERIT = 2,
 	ATTR_AGGREGATE = 4,
 	ATTR_COMPOSE = 8
 };
 
+enum cardinal {
+	CARD_NONE = 0,
+	CARD_ONE = 1,
+	CARD_MANY = 2,
+	CARD_ZERO_MANY = 4
+};
+
 typedef struct {
-	char table1[SIZE_WORD];
-	char table2[SIZE_WORD];
+	char *table1, *table2;
 
-	char label[SIZE_WORD];
+	int dotted, inherit;
 
-	char cardinal1[SIZE_WORD];
-	char cardinal2[SIZE_WORD];
-
-	int bidi, dotted;
-
+	enum cardinal cardinal1, cardinal2;
 	enum attribute attribute;
 } t_state;
 

@@ -10,7 +10,7 @@ extern yylval;
 %option noyywrap
 
 label [a-zA-Z]+(\ *[a-zA-Z])*
-other [\[\],01\.\*\-<>\+]
+other [\[\],01\.\*\-<>\+\^]
 %%
 {label}		{
 				strncpy(word, yytext, SIZE_WORD);
