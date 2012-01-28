@@ -8,13 +8,17 @@ extern yylval;
 
 %}
 %option noyywrap
+
+label [a-zA-Z]+(\ *[a-zA-Z])*
+other [\[\],01\.\*\-<>\+]
+aggregate <>
+composite \+\+
 %%
-[a-zA-Z]+	{
+{label}		{
 				strncpy(word, yytext, SIZE_WORD);
 				return T_Word;
 			}
-[0-9]+		{ yylval = atoi(yytext); return T_Number; }
-[\[\],]		{ return yytext[0]; }
-->			{ return T_Arrow; }
---			{ return T_Line; }
+{aggregate}	{ return T_Aggregate; }
+{composite} { return T_Composite; }
+{other}		{ return yytext[0]; }
 .			{ /* ignore */ }

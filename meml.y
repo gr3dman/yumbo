@@ -6,7 +6,7 @@
 
 %}
 
-%token T_Word T_Number T_Arrow T_Line
+%token T_Word T_Aggregate T_Composite
 
 %%
 
@@ -18,15 +18,23 @@ Term : Pair
 	 | Table
 	 ;
 
-Pair : Table Relation Table { printf("pair\n"); }
+Pair : Table Relation Table
 	 ;
 
 Table : '[' T_Word ']' { printf("table %s\n", word); }
 	  ;
 
-Relation : T_Arrow
-		 | T_Line
+Relation : T_Attr '-' T_Arrow
 		 ;
+
+T_Attr : T_Aggregate	{ printf("aggregate\n"); }
+	   | T_Composite	{ printf("composite\n"); }
+	   |
+	   ;
+
+T_Arrow : '>'		{ printf("arrow\n"); }
+		|
+		;
 
 %%
 
