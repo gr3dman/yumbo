@@ -24,15 +24,19 @@ Pair : Table Relation Table
 Table : '[' T_Word ']' { printf("table %s\n", word); }
 	  ;
 
-Relation : T_Attr '-' T_Arrow
+Relation : Attr '-' Dotted Arrow
 		 ;
 
-T_Attr : T_Aggregate	{ printf("aggregate\n"); }
-	   | T_Composite	{ printf("composite\n"); }
-	   |
-	   ;
+Attr : T_Aggregate	{ printf("aggregate\n"); }
+	 | T_Composite	{ printf("composite\n"); }
+	 | 
+	 ;
 
-T_Arrow : '>'		{ printf("arrow\n"); }
+Dotted : '.' '-'	{ printf("dotted\n"); }
+		 |
+		 ;
+
+Arrow : '>'		{ printf("arrow\n"); }
 		|
 		;
 
