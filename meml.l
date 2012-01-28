@@ -4,8 +4,6 @@
 #include "y.tab.h"
 #include "meml.h"
 
-extern yylval;
-
 %}
 %option noyywrap
 

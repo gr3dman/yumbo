@@ -8,6 +8,9 @@ static t_state states[SIZE_STATES];
 static int head = 0;
 static t_state *current;
 
+
+/* parser actions */
+
 void term() {
 	current = &states[++head];
 }
@@ -45,6 +48,9 @@ void cardinal1(enum cardinal card) {
 void cardinal2(enum cardinal card) {
 	current->cardinal2 = card;
 }
+
+
+/* print functions */
 
 void print_attribute(enum attribute attr) {
 	printf("%s\n", attr == ATTR_REVERSE_ARROW ? "reverse arrow"
@@ -85,6 +91,9 @@ void print_states() {
 		print_state(&states[i]);
 	}
 }
+
+
+/* basic environment */
 
 void yyerror(char *msg) {
 	fprintf(stderr, "%s\n", msg);
