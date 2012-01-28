@@ -1,5 +1,4 @@
 %{
-#include <stdio.h>
 #include "meml.h"
 
 %}
@@ -38,15 +37,15 @@ Cardinal : '1'	{ $$ = CARD_ONE; }
 
 Attr : '<' '>'	{ $$ = ATTR_AGGREGATE; }
 	 | '+' '+'	{ $$ = ATTR_COMPOSE; }
-	 | '<'		{ $$ = ATTR_ARROW; }
+	 | '<'		{ $$ = ATTR_REVERSE_ARROW; }
 	 | 
 	 ;
 
-Dotted : '.' '-'	{ printf("dotted\n"); }
+Dotted : '.' '-'	{ dotted(); }
 		 |
 		 ;
 
-Arrow : '>'		{ printf("arrow\n"); }
+Arrow : '>'		{ arrow(); }
 		|
 		;
 

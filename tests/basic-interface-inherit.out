@@ -1,5 +1,5 @@
 table foo
-dotted
 inherit
+dotted
 table bar
 
