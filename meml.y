@@ -6,7 +6,7 @@
 
 %}
 
-%token T_Word T_Aggregate T_Composite
+%token T_Word
 
 %%
 
@@ -24,11 +24,18 @@ Pair : Table Relation Table
 Table : '[' T_Word ']' { printf("table %s\n", word); }
 	  ;
 
-Relation : Attr '-' Dotted Arrow
+Relation : Cardinal Attr '-' Dotted Arrow Cardinal
 		 ;
 
-Attr : T_Aggregate	{ printf("aggregate\n"); }
-	 | T_Composite	{ printf("composite\n"); }
+Cardinal : '1'	{ printf("one\n"); }
+		 | '*'	{ printf("many\n"); }
+		 | '0' '.' '.' '*'	{ printf("zero or many\n"); }
+		 |
+		 ;
+
+Attr : '<' '>'	{ printf("aggregate\n"); }
+	 | '+' '+'	{ printf("composite\n"); }
+	 | '<'		{ printf("reverse arrow\n"); }
 	 | 
 	 ;
 
