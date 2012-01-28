@@ -4,6 +4,8 @@
 
 #include "meml.h"
 
+extern char *yytext;
+
 static t_state states[SIZE_STATES];
 static int head = 0;
 static t_state *current;
@@ -96,7 +98,7 @@ void print_states() {
 /* basic environment */
 
 void yyerror(char *msg) {
-	fprintf(stderr, "%s\n", msg);
+	fprintf(stderr, "%s at %s\n", msg, yytext);
 }
 
 int main() {
