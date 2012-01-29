@@ -3,7 +3,7 @@
 
 %}
 
-%token T_Word
+%token T_Property
 
 %%
 
@@ -18,7 +18,7 @@ Term : Pair
 Pair : Table Relation Table
 	 ;
 
-Table : '[' T_Word ']' { table(word); }
+Table : '[' T_Property ']' { table(property); }
 	  ;
 
 Relation : Cardinal Attr '-' Dotted Arrow Cardinal {

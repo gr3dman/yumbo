@@ -6,13 +6,15 @@
 
 %}
 %option noyywrap
+%x INTABLE
 
-label [a-zA-Z]+(\ *[a-zA-Z])*
-other [\[\],01\.\*\-<>\+\^]
+property [^(\|;|\])]+
 %%
-{label}		{
-				strncpy(word, yytext, SIZE_WORD);
-				return T_Word;
+<INTABLE>{property}	{
+				strncpy(property, yytext, SIZE_PROPERTY);
+				return T_Property;
 			}
-{other}		{ return yytext[0]; }
-.			{ /* ignore */ }
+<INITIAL>"["	{ BEGIN(INTABLE); return yytext[0]; }
+<INTABLE>"]"	{ BEGIN(INITIAL); return yytext[0]; }
+<INITIAL>" "	{ /* ignore */ }
+.				{ return yytext[0]; }

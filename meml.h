@@ -1,5 +1,5 @@
 #define SIZE_STATES 128
-#define SIZE_WORD 256
+#define SIZE_PROPERTY 256
 
 enum attribute {
 	ATTR_NONE = 0,
@@ -25,7 +25,7 @@ typedef struct {
 	enum attribute attribute;
 } t_state;
 
-char word[SIZE_WORD];
+char property[SIZE_PROPERTY];
 
 
 void term();

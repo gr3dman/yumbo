@@ -12,6 +12,22 @@ static int head = 0;
 static t_state *current;
 
 
+void trim(char *str) {
+	char *in = str, *out = str, *last;
+
+	while (*in == ' ')
+		in++;
+
+	while (*in) {
+		if (*in != ' ')
+			last = out;
+		*(out++) = *(in++);
+	}
+
+	*(last+1) = 0;
+}
+
+
 /* parser actions */
 
 void term() {
@@ -26,6 +42,7 @@ void table(char *name) {
 	else
 		buff = current->table2 = malloc(len * sizeof (char));
 	strncpy(buff, name, len);
+	trim(buff);
 }
 
 void attribute(enum attribute attr) {
