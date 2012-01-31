@@ -5,12 +5,15 @@
 
 #include "meml.h"
 
-extern char *yytext;
+#define SIZE_STATES 128
 
-static t_state states[SIZE_STATES];
+extern char *yytext;
+extern int yyparse();
+
+static state_t states[SIZE_STATES];
 static int head = 0;
-static t_state *current;
-static t_proplist **current_proplist;
+static state_t *current;
+static proplist_t **current_proplist;
 
 
 void trim(char *str) {
@@ -43,8 +46,8 @@ void table() {
 void property(char *prop) {
 	int len = strlen(prop) + 1;
 
-	*current_proplist = malloc(sizeof (t_proplist));
-	bzero(*current_proplist, sizeof (t_proplist));
+	*current_proplist = malloc(sizeof (proplist_t));
+	bzero(*current_proplist, sizeof (proplist_t));
 	(*current_proplist)->val = malloc(len * sizeof (char));
 	strncpy((*current_proplist)->val, prop, len);
 	trim((*current_proplist)->val);
@@ -53,8 +56,8 @@ void property(char *prop) {
 }
 
 void line() {
-	*current_proplist = malloc(sizeof (t_proplist));
-	bzero(*current_proplist, sizeof(t_proplist));
+	*current_proplist = malloc(sizeof (proplist_t));
+	bzero(*current_proplist, sizeof(proplist_t));
 	(*current_proplist)->line = 1;
 
 	current_proplist = &(*current_proplist)->next;
@@ -102,8 +105,8 @@ void print_cardinality(char *fmt, enum cardinal card) {
 				: "unknown");
 }
 
-void print_proplist(t_proplist *proplist) {
-	t_proplist *pl;
+void print_proplist(proplist_t *proplist) {
+	proplist_t *pl;
 	int props;
 	for (pl = proplist, props = 0; pl; pl = pl->next, props++)
 		if (pl->line)
@@ -112,7 +115,7 @@ void print_proplist(t_proplist *proplist) {
 			printf("%s %s\n", props ? "property" : "table", pl->val);
 }
 
-void print_state(t_state *state) {
+void print_state(state_t *state) {
 	/* printf("table %s\n", state->table1); */
 	print_proplist(state->table1);
 	if (state->inherit)
@@ -148,7 +151,7 @@ void yyerror(char *msg) {
 int main() {
 	int result = 0;
 
-	bzero(states, sizeof (t_state) * SIZE_STATES);
+	bzero(states, sizeof (state_t) * SIZE_STATES);
 	current = &states[0];
 	current_proplist = &current->table1;
 
