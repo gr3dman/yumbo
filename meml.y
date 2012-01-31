@@ -18,8 +18,13 @@ Term : Pair
 Pair : Table Relation Table
 	 ;
 
-Table : '[' T_Property ']' { table(property); }
+Table : '[' PropList ']' { table(); }
 	  ;
+
+PropList : T_Property				{ property(prop); }
+		 | PropList '|' T_Property	{ line(); property(prop); }
+		 | PropList ';' T_Property	{ property(prop); }
+		 ;
 
 Relation : Cardinal Attr '-' Dotted Arrow Cardinal {
 			cardinal1($1);

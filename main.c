@@ -10,6 +10,7 @@ extern char *yytext;
 static t_state states[SIZE_STATES];
 static int head = 0;
 static t_state *current;
+static t_proplist **current_proplist;
 
 
 void trim(char *str) {
@@ -32,17 +33,31 @@ void trim(char *str) {
 
 void term() {
 	current = &states[++head];
+	current_proplist = &current->table1;
 }
 
-void table(char *name) {
-	char *buff;
-	int len = strlen(name) + 1;
-	if (!current->table1)
-		buff = current->table1 = malloc(len * sizeof (char));
-	else
-		buff = current->table2 = malloc(len * sizeof (char));
-	strncpy(buff, name, len);
-	trim(buff);
+void table() {
+	current_proplist = &current->table2;
+}
+
+void property(char *prop) {
+	int len = strlen(prop) + 1;
+
+	*current_proplist = malloc(sizeof (t_proplist));
+	bzero(*current_proplist, sizeof (t_proplist));
+	(*current_proplist)->val = malloc(len * sizeof (char));
+	strncpy((*current_proplist)->val, prop, len);
+	trim((*current_proplist)->val);
+
+	current_proplist = &(*current_proplist)->next;
+}
+
+void line() {
+	*current_proplist = malloc(sizeof (t_proplist));
+	bzero(*current_proplist, sizeof(t_proplist));
+	(*current_proplist)->line = 1;
+
+	current_proplist = &(*current_proplist)->next;
 }
 
 void attribute(enum attribute attr) {
@@ -87,8 +102,19 @@ void print_cardinality(char *fmt, enum cardinal card) {
 				: "unknown");
 }
 
+void print_proplist(t_proplist *proplist) {
+	t_proplist *pl;
+	int props;
+	for (pl = proplist, props = 0; pl; pl = pl->next, props++)
+		if (pl->line)
+			printf("line\n");
+		else
+			printf("%s %s\n", props ? "property" : "table", pl->val);
+}
+
 void print_state(t_state *state) {
-	printf("table %s\n", state->table1);
+	/* printf("table %s\n", state->table1); */
+	print_proplist(state->table1);
 	if (state->inherit)
 		printf("inherit\n");
 	if (state->cardinal1)
@@ -102,14 +128,14 @@ void print_state(t_state *state) {
 	if (state->cardinal2)
 		print_cardinality("%s\n", state->cardinal2);
 	if (state->table2)
-		printf("table %s\n", state->table2);
+		print_proplist(state->table2);
+		/* printf("table %s\n", state->table2); */
 }
 
 void print_states() {
 	int i;
-	for (i = 0; i < head; i++) {
+	for (i = 0; i < head; i++)
 		print_state(&states[i]);
-	}
 }
 
 
@@ -124,6 +150,7 @@ int main() {
 
 	bzero(states, sizeof (t_state) * SIZE_STATES);
 	current = &states[0];
+	current_proplist = &current->table1;
 
 	result = yyparse();
 	if (!result)

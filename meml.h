@@ -1,5 +1,11 @@
 #define SIZE_STATES 128
-#define SIZE_PROPERTY 256
+#define SIZE_PROP 256
+
+typedef struct proplist {
+	int line;
+	char *val;
+	struct proplist *next;
+} t_proplist;
 
 enum attribute {
 	ATTR_NONE = 0,
@@ -17,7 +23,7 @@ enum cardinal {
 };
 
 typedef struct {
-	char *table1, *table2;
+	t_proplist *table1, *table2;
 
 	int arrow, dotted, inherit;
 
@@ -25,11 +31,14 @@ typedef struct {
 	enum attribute attribute;
 } t_state;
 
-char property[SIZE_PROPERTY];
+char prop[SIZE_PROP];
 
 
 void term();
-void table(char *name);
+void table();
+
+void property(char *prop);
+void line();
 
 void attribute(enum attribute attr);
 void inherit();
