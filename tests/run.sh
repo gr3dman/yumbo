@@ -19,7 +19,7 @@ do
 
 	printf "$IN... "
 	TMP=$( mktemp -t meml )
-	../meml < "$IN" | grep -v "^$" > "$TMP" 2>&1
+	../testrunner < "$IN" | grep -v "^$" > "$TMP" 2>&1
 
 	if diff -B "$OUT" "$TMP";
 	then

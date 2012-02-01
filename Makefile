@@ -1,5 +1,5 @@
-meml:	main.c lex.yy.c y.tab.c
-		cc -o meml *.c
+testrunner:	test.c parse.c lex.yy.c y.tab.c
+			cc -o testrunner parse.c lex.yy.c y.tab.c test.c
 
 lex.yy.c:	meml.l y.tab.c
 			lex meml.l
@@ -7,7 +7,7 @@ lex.yy.c:	meml.l y.tab.c
 y.tab.c:	meml.y
 			yacc -vdt meml.y
 
-test:	meml
+test:	testrunner
 		cd tests && ./run.sh
 
 clean:

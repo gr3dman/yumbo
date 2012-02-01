@@ -1,3 +1,6 @@
+#ifndef MEML_H
+#define MEML_H
+
 #define SIZE_PROP 256
 
 typedef struct proplist {
@@ -31,7 +34,9 @@ typedef struct {
 } state_t;
 
 char prop[SIZE_PROP];
+state_t *states;
 
+void init();
 
 void term();
 void table();
@@ -47,4 +52,4 @@ void dotted();
 void cardinal1(enum cardinal card);
 void cardinal2(enum cardinal card);
 
-void yyerror(char *msg);
+#endif
