@@ -1,5 +1,8 @@
+memldot:	dot.c parse.c lex.yy.c y.tab.c
+			cc -o memldot dot.c parse.c lex.yy.c y.tab.c
+
 testrunner:	test.c parse.c lex.yy.c y.tab.c
-			cc -o testrunner parse.c lex.yy.c y.tab.c test.c
+			cc -o testrunner test.c parse.c lex.yy.c y.tab.c
 
 lex.yy.c:	meml.l y.tab.c
 			lex meml.l
