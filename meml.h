@@ -2,6 +2,7 @@
 #define MEML_H
 
 #define SIZE_PROP 256
+#define SIZE_STATES 128
 
 typedef struct proplist {
 	int line;
@@ -34,11 +35,11 @@ typedef struct {
 } state_t;
 
 char prop[SIZE_PROP];
-state_t *states;
+state_t states[SIZE_STATES];
 
 void init();
 
-void term();
+void pair();
 void table();
 
 void property(char *prop);

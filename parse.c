@@ -26,13 +26,13 @@ void trim(char *str) {
 }
 
 void init() {
-	current = states = malloc(sizeof (state_t));
+	current = states;
 	current_proplist = &current->table1;
 }
 
 /* parser actions */
 
-void term() {
+void pair() {
 	current = &states[++myhead];
 
 	current_proplist = &current->table1;

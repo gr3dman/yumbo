@@ -7,8 +7,8 @@
 
 %%
 
-Diagram : Term				{ term(); }
-		| Term ',' Diagram
+Diagram : Term				{ pair(); }
+		| Diagram ',' Term { pair(); }
 		;
 
 Term : Pair
