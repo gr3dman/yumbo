@@ -45,9 +45,8 @@ void table() {
 void property(char *prop) {
 	int len = strlen(prop) + 1;
 
-	*current_proplist = malloc(sizeof (proplist_t));
-	bzero(*current_proplist, sizeof (proplist_t));
-	(*current_proplist)->val = malloc(len * sizeof (char));
+	*current_proplist = calloc(1, sizeof (proplist_t));
+	(*current_proplist)->val = calloc(len, sizeof (char));
 	strncpy((*current_proplist)->val, prop, len);
 	trim((*current_proplist)->val);
 
@@ -55,8 +54,7 @@ void property(char *prop) {
 }
 
 void line() {
-	*current_proplist = malloc(sizeof (proplist_t));
-	bzero(*current_proplist, sizeof(proplist_t));
+	*current_proplist = calloc(1, sizeof (proplist_t));
 	(*current_proplist)->line = 1;
 
 	current_proplist = &(*current_proplist)->next;
