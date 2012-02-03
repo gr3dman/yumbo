@@ -15,6 +15,7 @@ void print_attribute(enum attribute attr) {
 	printf("%s\n", attr == ATTR_REVERSE_ARROW ? "reverse arrow"
 			: attr == ATTR_AGGREGATE ? "aggregate"
 			: attr == ATTR_COMPOSE ? "composite"
+			: attr == ATTR_INHERIT ? "inherit"
 			: "unknown");
 }
 
@@ -39,8 +40,6 @@ void print_proplist(proplist_t *proplist) {
 void print_state(state_t *state) {
 	/* printf("table %s\n", state->table1); */
 	print_proplist(state->table1);
-	if (state->inherit)
-		printf("inherit\n");
 	if (state->cardinal1)
 		print_cardinality("%s\n", state->cardinal1);
 	if (state->attribute)

@@ -14,7 +14,8 @@ enum attribute {
 	ATTR_NONE = 0,
 	ATTR_REVERSE_ARROW = 1,
 	ATTR_AGGREGATE = 2,
-	ATTR_COMPOSE = 4
+	ATTR_COMPOSE = 4,
+	ATTR_INHERIT = 8
 };
 
 enum cardinal {
@@ -28,7 +29,7 @@ enum cardinal {
 typedef struct {
 	proplist_t *table1, *table2;
 
-	int arrow, dotted, inherit;
+	int arrow, dotted;
 
 	enum cardinal cardinal1, cardinal2;
 	enum attribute attribute;

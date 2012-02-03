@@ -65,7 +65,7 @@ void attribute(enum attribute attr) {
 }
 
 void inherit() {
-	current->inherit = 1;
+	current->attribute = ATTR_INHERIT;
 }
 
 void arrow() {
