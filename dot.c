@@ -4,9 +4,25 @@
 
 extern int yyparse();
 
+void print_xml_escaped(char *s) {
+	for (; *s; s++) {
+		switch (*s) {
+			case '<':
+				printf("&lt;");
+				break;
+			case '>':
+				printf("&gt;");
+				break;
+			default:
+				printf("%c", *s);
+		}
+	}
+}
+
 void print_table(proplist_t *props) {
 	char *name = props->val;
-	printf("\t%s [shape=record label=\"{%s", name, name);
+	printf("\t%s [shape=record label=\"{", name);
+	print_xml_escaped(name);
 	for (props = props->next; props; props = props->next) {
 		if (!props->line)
 			printf("|%s", props->val);
