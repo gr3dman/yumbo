@@ -48,10 +48,17 @@ void print_cardinal(char *label, enum cardinal card) {
 }
 
 void print_tail(state_t *state) {
-	if (state->attribute || state->cardinal1 || state->cardinal2) {
+	if (state->dotted || state->attribute
+			|| state->cardinal1 || state->cardinal2) {
+
 		printf(" [");
 
+		if (state->dotted)
+			printf("style=dashed");
+
 		if (state->attribute) {
+			if (state->dotted)
+				printf(",");
 			printf("dir=both,arrowtail=");
 			switch (state->attribute) {
 				case ATTR_REVERSE_ARROW:
@@ -67,17 +74,16 @@ void print_tail(state_t *state) {
 		}
 
 		if (state->cardinal1) {
-			if (state->attribute)
+			if (state->dotted || state->attribute)
 				printf(",");
 			print_cardinal("taillabel", state->cardinal1);
 		}
 
 		if (state->cardinal2) {
-			if (state->attribute || state->cardinal1)
+			if (state->dotted || state->attribute || state->cardinal1)
 				printf(",");
 			print_cardinal("headlabel", state->cardinal2);
 		}
-
 		printf("]");
 	}
 }
