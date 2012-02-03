@@ -3,6 +3,7 @@
 #include "meml.h"
 
 extern int yyparse();
+extern char *yytext;
 
 void print_xml_escaped(char *s) {
 	for (; *s; s++) {
@@ -47,7 +48,7 @@ void print_cardinal(char *label, enum cardinal card) {
 	}
 }
 
-void print_tail(state_t *state) {
+void print_edge_attributes(state_t *state) {
 	if (state->dotted || state->attribute
 			|| state->cardinal1 || state->cardinal2) {
 
@@ -95,7 +96,7 @@ void print_edge(state_t *state) {
 	tab1 = state->table1->val;
 	tab2 = state->table2->val;
 	printf("\t%s -> %s", tab1, tab2);
-	print_tail(state);
+	print_edge_attributes(state);
 	printf(";\n");
 }
 
@@ -125,7 +126,7 @@ void print_graph() {
 }
 
 void yyerror(char *msg) {
-	fprintf(stderr, "%s\n", msg);
+	fprintf(stderr, "%s near \n", msg, yytext);
 }
 
 int main() {
