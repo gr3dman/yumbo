@@ -62,7 +62,7 @@ void print_tail(state_t *state) {
 			printf("dir=both,arrowtail=");
 			switch (state->attribute) {
 				case ATTR_REVERSE_ARROW:
-					printf("rev");
+					printf("normal");
 					break;
 				case ATTR_AGGREGATE:
 					printf("odiamond");
@@ -70,6 +70,8 @@ void print_tail(state_t *state) {
 				case ATTR_COMPOSE:
 					printf("diamond");
 					break;
+				case ATTR_INHERIT:
+					printf("empty,arrowhead=none");
 			}
 		}
 
