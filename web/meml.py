@@ -8,7 +8,6 @@ URLS = (
     '/meml/diagram/(.*)\.(.+)', 'Diagram',
     '/meml/', 'Root'
 )
-MEMLDOT='/home/gredman/source/meml/memldot'
 DOT='/usr/local/bin/dot'
 FORMATS = {
         'gif':      'image/gif',
@@ -20,7 +19,7 @@ FORMATS = {
 JINJA = render_jinja(config.app_root + '/' + config.template_root, encoding = 'utf-8')
 
 def draw(text, fmt):
-    cmd = '%s | dot -T%s' % (MEMLDOT, fmt)
+    cmd = '%s | dot -T%s' % (config.memldot_path, fmt)
     r = envoy.run(cmd, text)
     return r.std_out
 
