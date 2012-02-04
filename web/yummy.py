@@ -1,4 +1,4 @@
-import envoy
+import subprocess
 import web
 from web.contrib.template import render_jinja
 
@@ -19,9 +19,17 @@ FORMATS = {
 JINJA = render_jinja(config.app_root + '/' + config.template_root, encoding = 'utf-8')
 
 def draw(text, fmt):
-    cmd = '%s | dot -T%s' % (config.yummydot_path, fmt)
-    r = envoy.run(cmd, text)
-    return r.std_out
+    echo = subprocess.Popen(['echo', text], stdout=subprocess.PIPE)
+    yummydot = subprocess.Popen(config.yummydot_path,
+                                stdin=echo.stdout, stdout=subprocess.PIPE)
+    dot = subprocess.Popen(['dot', '-T%s' % fmt],
+                           stdin=yummydot.stdout, stdout=subprocess.PIPE)
+    (out, err) = dot.communicate()
+    if dot.returncode == 0:
+        return out
+    else:
+        raise Exception('return code was %d, stderr is %s',
+                (dot.returncode, dot.stderr))
 
 class Root:
     def GET(self):
