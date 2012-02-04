@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <script>
+            var base = "http://localhost:8080/diagram/";
+            function get(id) {
+                return document.getElementById(id);
+            }
+            function chomp(ev) {
+                if (ev.keyCode == 10 || ev.keyCode == 13) {
+                    update_image();
+                    return false;
+                }
+            }
+            function update_image() {
+                var text = get("text").value;
+                var format = get("format").value;
+                get("image").src = base + text + "." + format;
+            }
+            function initialise() {
+                get("text").onkeydown = chomp;
+                get("text").onchange =
+                    get("format").onchange =
+                    update_image;
+                update_image();
+            }
+            window.onload = initialise;
+        </script>
+	</head>
+    <body>
+        <form>
+            <textarea id="text">[Customer]1<>->0..*[Order],
+[Order]*++->*[LineItem],
+[Order]->1[DeliveryMethod],
+[Order]*->*[Product],
+[Category]<->[Product],
+[DeliveryMethod]^-[National],
+[DeliveryMethod]^-[International]</textarea>
+            <select id="format">
+                <option value="jpg">jpg</option>
+                <option value="png">png</option>
+                <option value="svg" selected>svg</option>
+            </select>
+        </form>
+        <img id="image">
+    </body>
+</html>
