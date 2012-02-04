@@ -18,7 +18,7 @@ do
 	[ -f "$OUT" ] || continue
 
 	printf "$IN... "
-	TMP=$( mktemp -t meml )
+	TMP=$( mktemp -t yummy )
 	../testrunner < "$IN" | grep -v "^$" > "$TMP" 2>&1
 
 	if diff -B "$OUT" "$TMP";
@@ -35,7 +35,7 @@ do
 	[ -f "$IN" ] || (echo "no tests" && continue )
 
 	printf "$IN... "
-	if ../meml < "$IN" > /dev/null 2>&1;
+	if ../testrunner < "$IN" > /dev/null 2>&1;
 	then
 		red BAD
 		RESULT=1

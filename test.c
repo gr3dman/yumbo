@@ -3,7 +3,7 @@
 #include <string.h>
 #include <strings.h>
 
-#include "meml.h"
+#include "parse.h"
 
 extern char *yytext;
 extern int yyparse();

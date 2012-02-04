@@ -1,5 +1,5 @@
-#ifndef MEML_H
-#define MEML_H
+#ifndef PARSE_H
+#define PARSE_H
 
 #define SIZE_PROP 256
 #define SIZE_STATES 128

@@ -5,8 +5,8 @@ from web.contrib.template import render_jinja
 import config
 
 URLS = (
-    '/meml/diagram/(.*)\.(.+)', 'Diagram',
-    '/meml/', 'Root'
+    '/yummy/diagram/(.*)\.(.+)', 'Diagram',
+    '/yummy/', 'Root'
 )
 DOT='/usr/local/bin/dot'
 FORMATS = {
@@ -19,7 +19,7 @@ FORMATS = {
 JINJA = render_jinja(config.app_root + '/' + config.template_root, encoding = 'utf-8')
 
 def draw(text, fmt):
-    cmd = '%s | dot -T%s' % (config.memldot_path, fmt)
+    cmd = '%s | dot -T%s' % (config.yummydot_path, fmt)
     r = envoy.run(cmd, text)
     return r.std_out
 

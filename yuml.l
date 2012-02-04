@@ -2,7 +2,7 @@
 #include <string.h>
 
 #include "y.tab.h"
-#include "meml.h"
+#include "parse.h"
 
 %}
 %option noyywrap

@@ -1,14 +1,14 @@
-memldot:	dot.c parse.c lex.yy.c y.tab.c
-			cc -o memldot dot.c parse.c lex.yy.c y.tab.c
+yummydot:	dot.c parse.c lex.yy.c y.tab.c
+			cc -o yummydot dot.c parse.c lex.yy.c y.tab.c
 
 testrunner:	test.c parse.c lex.yy.c y.tab.c
 			cc -o testrunner test.c parse.c lex.yy.c y.tab.c
 
-lex.yy.c:	meml.l y.tab.c
-			lex meml.l
+lex.yy.c:	yuml.l y.tab.c
+			lex yuml.l
 
-y.tab.c:	meml.y
-			yacc -vdt meml.y
+y.tab.c:	yuml.y
+			yacc -vdt yuml.y
 
 test:	testrunner
 		cd tests && ./run.sh
