@@ -8,7 +8,7 @@
 %option noyywrap
 %x INTABLE
 
-property [^\|;|\]]+
+property [^\|;|\]"]+
 %%
 <INTABLE>{property}	{
 				strncpy(prop, yytext, SIZE_PROP);
