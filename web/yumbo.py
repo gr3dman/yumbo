@@ -5,8 +5,8 @@ from web.contrib.template import render_jinja
 import config
 
 URLS = (
-    '/yummy/diagram/(.*)\.(.+)', 'Diagram',
-    '/yummy/', 'Root'
+    '/yumbo/diagram/(.*)\.(.+)', 'Diagram',
+    '/yumbo/', 'Root'
 )
 DOT='/usr/local/bin/dot'
 FORMATS = {
@@ -20,10 +20,10 @@ JINJA = render_jinja(config.app_root + '/' + config.template_root, encoding = 'u
 
 def draw(text, fmt):
     echo = subprocess.Popen(['echo', text], stdout=subprocess.PIPE)
-    yummydot = subprocess.Popen(config.yummydot_path,
+    yumbodot = subprocess.Popen(config.yumbodot_path,
                                 stdin=echo.stdout, stdout=subprocess.PIPE)
     dot = subprocess.Popen(['dot', '-T%s' % fmt],
-                           stdin=yummydot.stdout, stdout=subprocess.PIPE)
+                           stdin=yumbodot.stdout, stdout=subprocess.PIPE)
     (out, err) = dot.communicate()
     if dot.returncode == 0:
         return out

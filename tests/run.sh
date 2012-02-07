@@ -18,7 +18,7 @@ do
 	[ -f "$OUT" ] || continue
 
 	printf "$IN... "
-	TMP=$( mktemp -t yummy )
+	TMP=$( mktemp -t yumbo )
 	../testrunner < "$IN" | grep -v "^$" > "$TMP" 2>&1
 
 	if diff -B "$OUT" "$TMP";

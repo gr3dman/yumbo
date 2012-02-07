@@ -1,5 +1,5 @@
-yummydot:	dot.c parse.c lex.yy.c y.tab.c
-			cc -o yummydot dot.c parse.c lex.yy.c y.tab.c
+yumbodot:	dot.c parse.c lex.yy.c y.tab.c
+			cc -o yumbodot dot.c parse.c lex.yy.c y.tab.c
 
 testrunner:	test.c parse.c lex.yy.c y.tab.c
 			cc -o testrunner test.c parse.c lex.yy.c y.tab.c
