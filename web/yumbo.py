@@ -8,7 +8,6 @@ URLS = (
     '/yumbo/diagram/(.*)\.(.+)', 'Diagram',
     '/yumbo/', 'Root'
 )
-DOT='/usr/local/bin/dot'
 FORMATS = {
         'gif':      'image/gif',
         'jpeg':     'image/jpeg',
