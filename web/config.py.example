@@ -1,0 +1,5 @@
+app_root = '/source/to/this/directory'
+template_root = 'static'
+diagram_base_url = '/yumbo/diagram/'
+yumbodot_path = '/path/to/yumbodot/executable'
+dot_path = '/path/to/dot/executable'
