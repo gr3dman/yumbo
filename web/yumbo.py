@@ -22,7 +22,7 @@ def draw(text, fmt):
     echo = subprocess.Popen(['echo', text], stdout=subprocess.PIPE)
     yumbodot = subprocess.Popen(config.yumbodot_path,
                                 stdin=echo.stdout, stdout=subprocess.PIPE)
-    dot = subprocess.Popen(['dot', '-T%s' % fmt],
+    dot = subprocess.Popen([config.dot_path, '-T%s' % fmt],
                            stdin=yumbodot.stdout, stdout=subprocess.PIPE)
     (out, err) = dot.communicate()
     if dot.returncode == 0:
