@@ -18,4 +18,4 @@ property [^\|;|\]"]+
 <INTABLE>"]"    { BEGIN(INITIAL); return yytext[0]; }
 <INTABLE>.      { return yytext[0]; }
 <INITIAL>" "    { /* ignore */ }
-.               { return yytext[0]; }
+<INITIAL>.      { return yytext[0]; }

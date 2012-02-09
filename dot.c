@@ -133,7 +133,7 @@ void print_graph() {
 }
 
 void yyerror(char *msg) {
-	fprintf(stderr, "%s near \n", msg, yytext);
+	fprintf(stderr, "%s near \"%s\"\n", msg, yytext);
 }
 
 int main() {
