@@ -5,6 +5,9 @@
 extern int yyparse();
 extern char *yytext;
 
+const float LABEL_DIST = 1.8;
+const int LABEL_ANGLE = 60;
+
 void print_xml_escaped(char *s) {
 	for (; *s; s++) {
 		switch (*s) {
@@ -94,6 +97,11 @@ void print_edge_attributes(state_t *state) {
 				printf(",");
 			print_cardinal("headlabel", state->cardinal2);
 		}
+
+		if (state->cardinal1 || state->cardinal2) {
+			printf(",labelangle=%d,labeldistance=%f", LABEL_ANGLE, LABEL_DIST);
+		}
+
 		printf("]");
 	}
 }
